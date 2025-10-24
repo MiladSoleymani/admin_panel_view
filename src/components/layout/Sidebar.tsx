@@ -18,6 +18,8 @@ import AssessmentIcon from '@mui/icons-material/Assessment';
 import SettingsIcon from '@mui/icons-material/Settings';
 import SecurityIcon from '@mui/icons-material/Security';
 import AppsIcon from '@mui/icons-material/Apps';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const drawerWidth = 260;
 
@@ -31,6 +33,8 @@ const menuItems = [
 ];
 
 export default function Sidebar() {
+  const pathname = usePathname();
+
   return (
     <Drawer
       variant="permanent"
@@ -70,13 +74,15 @@ export default function Sidebar() {
       </Toolbar>
       <Divider />
       <List sx={{ px: 2, py: 2 }}>
-        {menuItems.map((item, index) => {
+        {menuItems.map((item) => {
           const Icon = item.icon;
-          const isActive = index === 0; // First item (Dashboard) is active by default
+          const isActive = pathname === item.path;
 
           return (
             <ListItem key={item.text} disablePadding sx={{ mb: 0.5 }}>
               <ListItemButton
+                component={Link}
+                href={item.path}
                 sx={{
                   borderRadius: 2,
                   bgcolor: isActive ? 'rgba(144, 202, 249, 0.16)' : 'transparent',
