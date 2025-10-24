@@ -79,14 +79,14 @@ export default function Sidebar() {
               <ListItemButton
                 sx={{
                   borderRadius: 2,
-                  bgcolor: isActive ? 'primary.main' : 'transparent',
-                  color: isActive ? 'white' : 'text.primary',
+                  bgcolor: isActive ? 'rgba(144, 202, 249, 0.16)' : 'transparent',
+                  color: isActive ? 'primary.main' : 'text.primary',
                   '&:hover': {
-                    bgcolor: isActive ? 'primary.dark' : 'action.hover',
+                    bgcolor: isActive ? 'rgba(144, 202, 249, 0.24)' : 'rgba(255, 255, 255, 0.08)',
                   },
                 }}
               >
-                <ListItemIcon sx={{ color: isActive ? 'white' : 'text.secondary', minWidth: 40 }}>
+                <ListItemIcon sx={{ color: isActive ? 'primary.main' : 'text.secondary', minWidth: 40 }}>
                   <Icon />
                 </ListItemIcon>
                 <ListItemText
