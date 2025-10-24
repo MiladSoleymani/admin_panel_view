@@ -229,10 +229,12 @@ export default function AnalyticsPage() {
                 <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
                   Users, API calls, and revenue over time
                 </Typography>
-                <Box sx={{ height: 250, display: 'flex', alignItems: 'flex-end', gap: 1 }}>
+                <Box sx={{ height: 300, display: 'flex', alignItems: 'flex-end', gap: 2, pt: 2 }}>
                   {usageData.map((data, index) => {
                     const maxValue = Math.max(...usageData.map(d => d.users));
-                    const height = (data.users / maxValue) * 100;
+                    const heightPercent = (data.users / maxValue) * 100;
+                    const minHeight = 20; // Minimum height in pixels
+                    const height = Math.max(minHeight, (heightPercent / 100) * 250); // Convert to pixels
                     return (
                       <Box
                         key={index}
@@ -241,22 +243,62 @@ export default function AnalyticsPage() {
                           display: 'flex',
                           flexDirection: 'column',
                           alignItems: 'center',
-                          gap: 1
+                          gap: 1,
+                          position: 'relative'
                         }}
                       >
                         <Box
                           sx={{
                             width: '100%',
-                            height: `${height}%`,
+                            height: `${height}px`,
                             background: 'linear-gradient(180deg, #667eea 0%, #764ba2 100%)',
                             borderRadius: 1,
                             transition: 'all 0.3s ease',
+                            position: 'relative',
+                            cursor: 'pointer',
                             '&:hover': {
                               transform: 'scaleY(1.05)',
-                              opacity: 0.8
+                              opacity: 0.8,
+                              '& .hover-tooltip': {
+                                opacity: 1,
+                                visibility: 'visible'
+                              }
                             }
                           }}
-                        />
+                        >
+                          <Box
+                            className="hover-tooltip"
+                            sx={{
+                              position: 'absolute',
+                              bottom: '100%',
+                              left: '50%',
+                              transform: 'translateX(-50%)',
+                              mb: 1,
+                              p: 1.5,
+                              bgcolor: 'rgba(0, 0, 0, 0.9)',
+                              borderRadius: 1,
+                              minWidth: 150,
+                              opacity: 0,
+                              visibility: 'hidden',
+                              transition: 'all 0.3s ease',
+                              zIndex: 10,
+                              border: '1px solid rgba(255, 255, 255, 0.1)'
+                            }}
+                          >
+                            <Typography variant="caption" fontWeight={600} sx={{ display: 'block', mb: 0.5 }}>
+                              {data.month} 2024
+                            </Typography>
+                            <Typography variant="caption" sx={{ display: 'block', color: '#90caf9' }}>
+                              Users: {data.users.toLocaleString()}
+                            </Typography>
+                            <Typography variant="caption" sx={{ display: 'block', color: '#81c784' }}>
+                              API Calls: {(data.apiCalls / 1000000).toFixed(1)}M
+                            </Typography>
+                            <Typography variant="caption" sx={{ display: 'block', color: '#ffb74d' }}>
+                              Revenue: ${(data.revenue / 1000).toFixed(0)}K
+                            </Typography>
+                          </Box>
+                        </Box>
                         <Typography variant="caption" color="text.secondary">
                           {data.month}
                         </Typography>
