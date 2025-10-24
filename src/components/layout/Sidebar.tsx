@@ -12,11 +12,7 @@ import {
   Typography,
   Divider,
 } from '@mui/material';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import PeopleIcon from '@mui/icons-material/People';
-import AssessmentIcon from '@mui/icons-material/Assessment';
 import SettingsIcon from '@mui/icons-material/Settings';
-import SecurityIcon from '@mui/icons-material/Security';
 import AppsIcon from '@mui/icons-material/Apps';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -24,11 +20,7 @@ import { usePathname } from 'next/navigation';
 const drawerWidth = 260;
 
 const menuItems = [
-  { text: 'Dashboard', icon: DashboardIcon, path: '/' },
-  { text: 'Users', icon: PeopleIcon, path: '/users' },
-  { text: 'Applications', icon: AppsIcon, path: '/applications' },
-  { text: 'Analytics', icon: AssessmentIcon, path: '/analytics' },
-  { text: 'Security', icon: SecurityIcon, path: '/security' },
+  { text: 'Dashboard', icon: AppsIcon, path: '/' },
   { text: 'Settings', icon: SettingsIcon, path: '/settings' },
 ];
 
